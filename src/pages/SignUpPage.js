@@ -4,15 +4,12 @@ class SignUpPage extends React.Component {
 
     state = {
         disabled: true,
-        password: '',
-        passwordRepeat: ''
     }
 
     onChangePassword = (event) => {
         const currentValue = event.target.value;
         this.setState({
             password: currentValue,
-            disabled: currentValue !== this.state.passwordRepeat
         });
     }
 
@@ -20,11 +17,15 @@ class SignUpPage extends React.Component {
         const currentValue = event.target.value;
         this.setState({
             passwordRepeat: currentValue,
-            disabled: currentValue !== this.state.password
         });
     }
 
     render() {
+        let disabled = true;
+        const { password, passwordRepeat } = this.state;
+        if (password && passwordRepeat) {
+            disabled = password !== passwordRepeat;
+        }
         return (
             <div>
                 <h1>Sign Up</h1>
@@ -36,7 +37,7 @@ class SignUpPage extends React.Component {
                 <input id="password" type="password" onChange={this.onChangePassword} />
                 <label htmlFor="password-repeat">Password Repeat</label>
                 <input id="password-repeat" type="password" onChange={this.onChangePasswordRepeat} />
-                <button disabled={this.state.disabled}>Sign Up</button>
+                <button disabled={disabled}>Sign Up</button>
             </div>
         );
     }

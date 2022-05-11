@@ -17,34 +17,6 @@ class SignUpPage extends React.Component {
         });
     }
 
-    onChangeUsername = (event) => {
-        const currentValue = event.target.value;
-        this.setState({
-            username: currentValue
-        });
-    }
-
-    onChangeEmail = (event) => {
-        const currentValue = event.target.value;
-        this.setState({
-            email: currentValue
-        });
-    }
-
-    onChangePassword = (event) => {
-        const currentValue = event.target.value;
-        this.setState({
-            password: currentValue
-        });
-    }
-
-    onChangePasswordRepeat = (event) => {
-        const currentValue = event.target.value;
-        this.setState({
-            passwordRepeat: currentValue
-        });
-    }
-
     submit = (event) => {
         event.preventDefault();
         const {username, email, password} = this.state;
@@ -54,6 +26,13 @@ class SignUpPage extends React.Component {
             password: password
         }
         axios.post("/api/1.0/users", body);
+        // fetch("api/1.0/users", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-type": "application/json"
+        //     },
+        //     body: JSON.stringify(body)
+        // });
     }
 
     render() {

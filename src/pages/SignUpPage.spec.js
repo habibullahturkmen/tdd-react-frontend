@@ -1,5 +1,5 @@
 import SignUpPage from "./SignUpPage";
-import {render, screen} from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { setupServer } from "msw/node";
 import { rest } from "msw";
@@ -50,13 +50,13 @@ describe("Sign Up Page", () => {
             expect(input.type).toBe("password");
         });
 
-        it('has SignUp button',  () => {
+        it('has SignUp button', () => {
             render(<SignUpPage />);
             const button = screen.queryByRole("button", { name: "Sign Up" });
             expect(button).toBeInTheDocument();
         });
 
-        it('disables the SignUp button initially',  () => {
+        it('disables the SignUp button initially', () => {
             render(<SignUpPage />);
             const button = screen.queryByRole("button", { name: "Sign Up" });
             expect(button).toBeDisabled();
@@ -72,7 +72,7 @@ describe("Sign Up Page", () => {
             const passwordRepeatInput = screen.getByLabelText("Password Repeat");
             userEvent.type(passwordInput, "password123");
             userEvent.type(passwordRepeatInput, "password123");
-            const button = screen.queryByRole("button", { name: "Sign Up"});
+            const button = screen.queryByRole("button", { name: "Sign Up" });
             expect(button).toBeEnabled();
         });
 
@@ -108,4 +108,3 @@ describe("Sign Up Page", () => {
         });
     });
 });
-

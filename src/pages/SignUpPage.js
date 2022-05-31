@@ -8,7 +8,8 @@ class SignUpPage extends React.Component {
         email: '',
         password: '',
         passwordRepeat: '',
-        apiProgress: false
+        apiProgress: false,
+        signUpSuccess: false
     }
 
     onChange = (event) => {
@@ -20,29 +21,31 @@ class SignUpPage extends React.Component {
 
     submit = (event) => {
         event.preventDefault();
-        const {username, email, password} = this.state;
+        const { username, email, password } = this.state;
         const body = {
             username: username,
             email: email,
             password: password
         }
         this.setState({apiProgress: true});
-        axios.post("/api/1.0/users", body);
+        axios.post("/api/1.0/users", body).then(() => {
+            this.setState({ signUpSuccess: true });
+        });
     }
 
     render() {
         let disabled = true;
-        const {password, passwordRepeat, apiProgress} = this.state;
+        const { password, passwordRepeat, apiProgress, signUpSuccess } = this.state;
         if (password && passwordRepeat) {
             disabled = password !== passwordRepeat;
         }
         return (
             <div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
-                <form className="card mt-5">
+                { !signUpSuccess && <form className="card mt-5" data-testid="form-sign-up">
+                    <div className="card-header">
+                        <h1 className="text-center">Sign Up</h1>
+                    </div>
                     <div className="card-body">
-                        <div className="card-header text-center">
-                            <h1>Sign Up</h1>
-                        </div>
                         <div className="mb-3">
                             <label htmlFor="username" className="form-label">Username</label>
                             <input id="username" onChange={this.onChange} className="form-control"/>
@@ -61,12 +64,13 @@ class SignUpPage extends React.Component {
                         </div>
                         <div className="text-center">
                             <button disabled={disabled || apiProgress} onClick={this.submit} className="btn btn-primary">
-                                {apiProgress && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}
+                                { apiProgress && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> }
                                 Sign Up
                             </button>
                         </div>
                     </div>
-                </form>
+                </form> }
+                { signUpSuccess && <div className="alert alert-success mt-3">Please check your e-mail to activate your account</div> }
             </div>
         );
     }

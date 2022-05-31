@@ -1,5 +1,5 @@
 import SignUpPage from "./SignUpPage";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { setupServer } from "msw/node";
 import { rest } from "msw";
@@ -99,7 +99,7 @@ describe("Sign Up Page", () => {
             setup();
             userEvent.click(button);
 
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await screen.findByText("Please check your e-mail to activate your account");
 
             expect(requestBody).toEqual({
                 username: "habibullah_turkmen",
@@ -121,12 +121,12 @@ describe("Sign Up Page", () => {
             userEvent.click(button);
             userEvent.click(button);
 
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await screen.findByText("Please check your e-mail to activate your account");
 
             expect(counter).toBe(1);
         });
 
-        it('displays spinner while the api request is in progress', async () => {
+        it('displays spinner while the api request is in progress', () => {
             const server = setupServer(
                 rest.post("api/1.0/users", (req, res, ctx) => {
                     return res(ctx.status(200));
@@ -143,6 +143,46 @@ describe("Sign Up Page", () => {
             setup();
             const spinner = screen.queryByRole('status', { hidden: true });
             expect(spinner).not.toBeInTheDocument();
+        });
+
+        it('displays account activation notification after clicking the submit button', async () => {
+            const server = setupServer(
+                rest.post("api/1.0/users", (req, res, ctx) => {
+                    return res(ctx.status(200));
+                })
+            );
+            server.listen();
+            setup();
+            userEvent.click(button);
+            const text = await screen.findByText("Please check your e-mail to activate your account");
+            expect(text).toBeInTheDocument();
+        });
+
+        it('should not display account activation notification before clicking the submit button', () => {
+            const server = setupServer(
+                rest.post("api/1.0/users", (req, res, ctx) => {
+                    return res(ctx.status(200));
+                })
+            );
+            server.listen();
+            setup();
+            const text = screen.queryByText("Please check your e-mail to activate your account");
+            expect(text).not.toBeInTheDocument();
+        });
+
+        it('hides sign up form after successful sign up request', async () => {
+            const server = setupServer(
+                rest.post("api/1.0/users", (req, res, ctx) => {
+                    return res(ctx.status(200));
+                })
+            );
+            server.listen();
+            setup();
+            const form = screen.getByTestId("form-sign-up");
+            userEvent.click(button);
+            await waitFor(() => {
+                expect(form).not.toBeInTheDocument();
+            });
         });
     });
 });

@@ -60,7 +60,10 @@ class SignUpPage extends React.Component {
                             <input id="passwordRepeat" type="password" onChange={this.onChange} className="form-control"/>
                         </div>
                         <div className="text-center">
-                            <button disabled={disabled || apiProgress} onClick={this.submit} className="btn btn-primary">Sign Up</button>
+                            <button disabled={disabled || apiProgress} onClick={this.submit} className="btn btn-primary">
+                                {apiProgress && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}
+                                Sign Up
+                            </button>
                         </div>
                     </div>
                 </form>

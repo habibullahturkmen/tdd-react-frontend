@@ -126,7 +126,7 @@ describe("Sign Up Page", () => {
             expect(counter).toBe(1);
         });
 
-        it('displays spinner after clicking the submit button', async () => {
+        it('displays spinner while the api request is in progress', async () => {
             const server = setupServer(
                 rest.post("api/1.0/users", (req, res, ctx) => {
                     return res(ctx.status(200));
@@ -134,14 +134,15 @@ describe("Sign Up Page", () => {
             );
             server.listen();
             setup();
-            // before clicking the submit button
-            let spinner = screen.queryByRole('status', { hidden: true });
-            expect(spinner).not.toBeInTheDocument();
-            // after clicking the submit button
             userEvent.click(button);
-            spinner = screen.getByRole('status', { hidden: true });
+            const spinner = screen.getByRole('status', { hidden: true });
             expect(spinner).toBeInTheDocument();
         });
 
+        it('does not display spinner when there is no api request', () => {
+            setup();
+            const spinner = screen.queryByRole('status', { hidden: true });
+            expect(spinner).not.toBeInTheDocument();
+        });
     });
 });

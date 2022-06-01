@@ -11,6 +11,7 @@
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
+    "start-server-and-test": "^1.14.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -19,7 +20,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cypress": "cypress open",
-    "cypress:headless": "cypress run"
+    "cypress:headless": "cypress run",
+    "e2e": "start-server-and-test start http://localhost:9876 cypress",
+    "e2e:headless": "start-server-and-test start http://localhost:9876 cypress:headless"
   },
   "eslintConfig": {
     "extends": [

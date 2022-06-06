@@ -61,6 +61,7 @@ class SignUpPage extends React.Component {
                         <div className="mb-3">
                             <label htmlFor="email" className="form-label">E-mail</label>
                             <input id="email" onChange={this.onChange} className="form-control"/>
+                            <span>{ errors.email }</span>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="password" className="form-label">Password</label>

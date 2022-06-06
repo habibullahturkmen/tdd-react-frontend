@@ -47,6 +47,9 @@ class SignUpPage extends React.Component {
         if (password && passwordRepeat) {
             disabled = password !== passwordRepeat;
         }
+
+        let passwordMismatch = password !== passwordRepeat ? "Password mismatch" : "";
+        
         return (
             <div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
                 { !signUpSuccess && <form className="card mt-5" data-testid="form-sign-up">
@@ -57,7 +60,7 @@ class SignUpPage extends React.Component {
                         <Input id="username" label="Username" onChange={this.onChange} help={errors.username} />
                         <Input id="email" label="E-mail" onChange={this.onChange} help={errors.email} />
                         <Input id="password" type="password" label="Password" onChange={this.onChange} help={errors.password} />
-                        <Input id="passwordRepeat" type="password" label="Password Repeat" onChange={this.onChange} help={errors.passwordRepeat} />
+                        <Input id="passwordRepeat" type="password" label="Password Repeat" onChange={this.onChange} help={passwordMismatch} />
                         <div className="text-center">
                             <button disabled={disabled || apiProgress} onClick={this.submit} className="btn btn-primary">
                                 { apiProgress && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> }

@@ -55,24 +55,9 @@ class SignUpPage extends React.Component {
                     </div>
                     <div className="card-body">
                         <Input id="username" label="Username" onChange={this.onChange} help={errors.username} />
-                        {/* <div className="mb-3">
-                            <label htmlFor="username" className="form-label">Username</label>
-                            <input id="username" onChange={this.onChange} className="form-control"/>
-                            <span>{ errors.username }</span>
-                        </div> */}
-                        <div className="mb-3">
-                            <label htmlFor="email" className="form-label">E-mail</label>
-                            <input id="email" onChange={this.onChange} className="form-control"/>
-                            <span>{ errors.email }</span>
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="password" className="form-label">Password</label>
-                            <input id="password" type="password" onChange={this.onChange} className="form-control"/>
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="passwordRepeat" className="form-label">Password Repeat</label>
-                            <input id="passwordRepeat" type="password" onChange={this.onChange} className="form-control"/>
-                        </div>
+                        <Input id="email" label="E-mail" onChange={this.onChange} help={errors.email} />
+                        <Input id="password" type="password" label="Password" onChange={this.onChange} help={errors.password} />
+                        <Input id="passwordRepeat" type="password" label="Password Repeat" onChange={this.onChange} help={errors.passwordRepeat} />
                         <div className="text-center">
                             <button disabled={disabled || apiProgress} onClick={this.submit} className="btn btn-primary">
                                 { apiProgress && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> }

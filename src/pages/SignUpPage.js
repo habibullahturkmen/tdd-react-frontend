@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Input from "../components/input";
+import { withTranslation } from "react-i18next";
 
 class SignUpPage extends React.Component {
 
@@ -45,6 +46,7 @@ class SignUpPage extends React.Component {
     }
 
     render() {
+        const { t } = this.props;
         let disabled = true;
         const { password, passwordRepeat, apiProgress, signUpSuccess, errors } = this.state;
         if (password && passwordRepeat) {
@@ -57,17 +59,17 @@ class SignUpPage extends React.Component {
             <div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
                 { !signUpSuccess && <form className="card mt-5" data-testid="form-sign-up">
                     <div className="card-header">
-                        <h1 className="text-center">Sign Up</h1>
+                        <h1 className="text-center">{t('signUp')}</h1>
                     </div>
                     <div className="card-body">
-                        <Input id="username" label="Username" onChange={this.onChange} help={errors.username} />
-                        <Input id="email" label="E-mail" onChange={this.onChange} help={errors.email} />
-                        <Input id="password" type="password" label="Password" onChange={this.onChange} help={errors.password} />
-                        <Input id="passwordRepeat" type="password" label="Password Repeat" onChange={this.onChange} help={passwordMismatch} />
+                        <Input id="username" label={t('username')} onChange={this.onChange} help={errors.username} />
+                        <Input id="email" label={t('email')} onChange={this.onChange} help={errors.email} />
+                        <Input id="password" type="password" label={t('password')} onChange={this.onChange} help={errors.password} />
+                        <Input id="passwordRepeat" type="password" label={t('passwordRepeat')} onChange={this.onChange} help={passwordMismatch} />
                         <div className="text-center">
                             <button disabled={disabled || apiProgress} onClick={this.submit} className="btn btn-primary">
                                 { apiProgress && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> }
-                                Sign Up
+                                {t('signUp')}
                             </button>
                         </div>
                     </div>
@@ -78,4 +80,6 @@ class SignUpPage extends React.Component {
     }
 }
 
-export default SignUpPage;
+const SignUpPageWithTranslation = withTranslation()(SignUpPage);
+
+export default SignUpPageWithTranslation;

@@ -254,5 +254,21 @@ describe("Sign Up Page", () => {
             expect(screen.getByLabelText(tr.passwordRepeat)).toBeInTheDocument();
         });
 
+        it('displays all text in English after changing the language', () => {
+            render(<SignUpPage />);
+
+            const turkishToggle = screen.getByTitle("Türkçe");
+            userEvent.click(turkishToggle);
+            const EnglishToggle = screen.getByTitle("English");
+            userEvent.click(EnglishToggle);
+
+            expect(screen.getByRole("heading", { name: en.signUp })).toBeInTheDocument();
+            expect(screen.getByRole("button", { name: en.signUp })).toBeInTheDocument();
+            expect(screen.getByLabelText(en.username)).toBeInTheDocument();
+            expect(screen.getByLabelText(en.email)).toBeInTheDocument();
+            expect(screen.getByLabelText(en.password)).toBeInTheDocument();
+            expect(screen.getByLabelText(en.passwordRepeat)).toBeInTheDocument();
+        });
+
     });
 });

@@ -2,6 +2,9 @@ import React from "react";
 import axios from "axios";
 import Input from "../components/input";
 import { withTranslation } from "react-i18next";
+import trFlag from "../assets/tr.png";
+import enFlag from "../assets/en.png";
+
 
 class SignUpPage extends React.Component {
 
@@ -49,6 +52,10 @@ class SignUpPage extends React.Component {
         this.props.i18n.changeLanguage("tr");
     }
 
+    onClickEnglish = () => {
+        this.props.i18n.changeLanguage("en");
+    }
+
     render() {
         const { t } = this.props;
         let disabled = true;
@@ -79,7 +86,8 @@ class SignUpPage extends React.Component {
                     </div>
                 </form> }
                 { signUpSuccess && <div className="alert alert-success mt-3">Please check your e-mail to activate your account</div> }
-                <span title="Türkçe" onClick={this.onClickTurkish}>TR</span>
+                <img src={trFlag} alt="Turkish Flag" width="24" height="24" onClick={this.onClickTurkish} />
+                <img src={enFlag} alt="Great Britian Flag" width="24" height="24" onClick={this.onClickEnglish} />
             </div>
         );
     }

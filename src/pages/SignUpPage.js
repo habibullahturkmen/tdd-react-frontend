@@ -45,6 +45,10 @@ class SignUpPage extends React.Component {
         }
     }
 
+    onClickTurkish = () => {
+        this.props.i18n.changeLanguage("tr");
+    }
+
     render() {
         const { t } = this.props;
         let disabled = true;
@@ -75,6 +79,7 @@ class SignUpPage extends React.Component {
                     </div>
                 </form> }
                 { signUpSuccess && <div className="alert alert-success mt-3">Please check your e-mail to activate your account</div> }
+                <span title="Türkçe" onClick={this.onClickTurkish}>TR</span>
             </div>
         );
     }

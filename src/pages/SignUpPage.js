@@ -86,8 +86,8 @@ class SignUpPage extends React.Component {
                     </div>
                 </form> }
                 { signUpSuccess && <div className="alert alert-success mt-3">Please check your e-mail to activate your account</div> }
-                <img src={trFlag} alt="Turkish Flag" width="24" height="24" onClick={this.onClickTurkish} />
-                <img src={enFlag} alt="Great Britian Flag" width="24" height="24" onClick={this.onClickEnglish} />
+                <img src={trFlag} alt="Turkish Flag" title="Türkçe" width="24" height="24" onClick={this.onClickTurkish} /> {' '}
+                <img src={enFlag} alt="Great Britian Flag" title="English" width="24" height="24" onClick={this.onClickEnglish} />
             </div>
         );
     }

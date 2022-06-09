@@ -53,7 +53,7 @@ class SignUpPage extends React.Component {
             disabled = password !== passwordRepeat;
         }
 
-        let passwordMismatch = password !== passwordRepeat ? "Password mismatch" : "";
+        let passwordMismatch = password !== passwordRepeat ? t("passwordMismatchValidation") : "";
         
         return (
             <div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2">

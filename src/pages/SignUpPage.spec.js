@@ -231,6 +231,8 @@ describe("Sign Up Page", () => {
 
     describe("Internationalization", () => {
 
+        let turkishToggle, EnglishToggle;
+
         const renderSetup = () => {
             render(
                 <>
@@ -238,6 +240,8 @@ describe("Sign Up Page", () => {
                     <LanguageSelector />
                 </>
             );
+            turkishToggle = screen.getByTitle("Türkçe");
+            EnglishToggle = screen.getByTitle("English");
         }
         
         afterEach(() => {
@@ -260,7 +264,6 @@ describe("Sign Up Page", () => {
         it('displays all text in Turkish after changing the language', () => {
             renderSetup();
 
-            const turkishToggle = screen.getByTitle("Türkçe");
             userEvent.click(turkishToggle);
 
             expect(screen.getByRole("heading", { name: tr.signUp })).toBeInTheDocument();
@@ -274,9 +277,7 @@ describe("Sign Up Page", () => {
         it('displays all text in English after changing the language', () => {
             renderSetup();
 
-            const turkishToggle = screen.getByTitle("Türkçe");
             userEvent.click(turkishToggle);
-            const EnglishToggle = screen.getByTitle("English");
             userEvent.click(EnglishToggle);
 
             expect(screen.getByRole("heading", { name: en.signUp })).toBeInTheDocument();
@@ -285,6 +286,17 @@ describe("Sign Up Page", () => {
             expect(screen.getByLabelText(en.email)).toBeInTheDocument();
             expect(screen.getByLabelText(en.password)).toBeInTheDocument();
             expect(screen.getByLabelText(en.passwordRepeat)).toBeInTheDocument();
+        });
+
+        it('displays password mismatch validation in Turkish', () => {
+            renderSetup();
+            
+            userEvent.click(turkishToggle);
+            const passwordInput = screen.getByLabelText(tr.password);
+            userEvent.type(passwordInput, "P4ss");
+            const validationMessageInTurkish = screen.queryByText(tr.passwordMismatchValidation);
+            
+            expect(validationMessageInTurkish).toBeInTheDocument();
         });
 
     });

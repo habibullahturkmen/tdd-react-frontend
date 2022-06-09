@@ -1,11 +1,12 @@
 import SignUpPage from "./SignUpPage";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { setupServer } from "msw/node";
 import { rest } from "msw";
-import "../locale/i18n";
+import i18n from "../locale/i18n";
 import en from "../locale/en.json";
 import tr from "../locale/tr.json";
+import LanguageSelector from "../components/LanguageSelector";
 
 describe("Sign Up Page", () => {
 
@@ -229,9 +230,25 @@ describe("Sign Up Page", () => {
     });
 
     describe("Internationalization", () => {
+
+        const renderSetup = () => {
+            render(
+                <>
+                    <SignUpPage />
+                    <LanguageSelector />
+                </>
+            );
+        }
         
+        afterEach(() => {
+            act(() => {
+                i18n.changeLanguage("en");
+            });
+        });
+
         it('initially displays all text in English', () => {
-            render(<SignUpPage />);
+            renderSetup();
+
             expect(screen.getByRole("heading", { name: en.signUp })).toBeInTheDocument();
             expect(screen.getByRole("button", { name: en.signUp })).toBeInTheDocument();
             expect(screen.getByLabelText(en.username)).toBeInTheDocument();
@@ -241,7 +258,7 @@ describe("Sign Up Page", () => {
         });
 
         it('displays all text in Turkish after changing the language', () => {
-            render(<SignUpPage />);
+            renderSetup();
 
             const turkishToggle = screen.getByTitle("Türkçe");
             userEvent.click(turkishToggle);
@@ -255,7 +272,7 @@ describe("Sign Up Page", () => {
         });
 
         it('displays all text in English after changing the language', () => {
-            render(<SignUpPage />);
+            renderSetup();
 
             const turkishToggle = screen.getByTitle("Türkçe");
             userEvent.click(turkishToggle);

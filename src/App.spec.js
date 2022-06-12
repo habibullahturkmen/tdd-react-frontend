@@ -3,6 +3,11 @@ import App from "./App";
 
 describe("Routing", () => {
 
+	const setup = (path) => {
+		window.history.pushState({}, "", path);
+		render(<App />);
+	}
+
 	it.each`
 		path          | pageTestId
 		${"/"}        | ${"home-page"}
@@ -11,8 +16,7 @@ describe("Routing", () => {
 		${"/user/1"}  | ${"user-page"}
 		${"/user/34"}  | ${"user-page"}
 	`("displays $pageTestId when path is $path", ({path, pageTestId}) => {
-		window.history.pushState({}, "", path);
-		render(<App />);
+		setup(path);
 		const page = screen.queryByTestId(pageTestId);
 		expect(page).toBeInTheDocument();
 	});
@@ -32,8 +36,7 @@ describe("Routing", () => {
 		${"/user/1"}  | ${"signup-page"}
 		${"/user/1"}  | ${"login-page"}
 	`("does not display $pageTestId when path is $path", ({path, pageTestId}) => {
-		window.history.pushState({}, "", path);
-		render(<App />);
+		setup(path);
 		const page = screen.queryByTestId(pageTestId);
 		expect(page).not.toBeInTheDocument();
 	});

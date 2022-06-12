@@ -5,7 +5,7 @@ import HomePage from "./pages/HomePage";
 function App() {
   return (
     <div className="container">
-      <HomePage />
+      { window.location.pathname === "/" && <HomePage /> }
       { window.location.pathname === "/signup" && <SignUpPage /> }
       <LanguageSelector />
     </div>

@@ -22,4 +22,10 @@ describe("Routing", () => {
 		expect(page).toBeInTheDocument();
 	});
 
+	it("does not display HomePage at /signup", () => {
+		window.history.pushState({}, "", "/signup");
+		render(<App />);
+		const page = screen.queryByTestId("home-page");
+		expect(page).not.toBeInTheDocument();
+	});
 });

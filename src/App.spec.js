@@ -9,10 +9,17 @@ describe("Routing", () => {
 		expect(homepage).toBeInTheDocument();
 	});
 
-	it("does not display SignUpPage when at /", () => {
+	it("does not display SignUpPage at /", () => {
 		render(<App />);
 		const page = screen.queryByTestId("signup-page");
 		expect(page).not.toBeInTheDocument();
+	});
+
+	it("displays SignUpPage at /signup", () => {
+		window.history.pushState({}, "", "/signup");
+		render(<App />);
+		const page = screen.queryByTestId("signup-page");
+		expect(page).toBeInTheDocument();
 	});
 
 });

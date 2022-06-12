@@ -3,29 +3,26 @@ import App from "./App";
 
 describe("Routing", () => {
 
-	it("displays homepage at /", () => {
+	it.each`
+		path         | pageTestId
+		${"/"}       | ${"home-page"}
+		${"/signup"} | ${"signup-page"}
+	`("displays $pageTestId when path is $path", ({path, pageTestId}) => {
+		window.history.pushState({}, "", path);
 		render(<App />);
-		const homepage = screen.getByTestId("home-page");
-		expect(homepage).toBeInTheDocument();
-	});
-
-	it("does not display SignUpPage at /", () => {
-		render(<App />);
-		const page = screen.queryByTestId("signup-page");
-		expect(page).not.toBeInTheDocument();
-	});
-
-	it("displays SignUpPage at /signup", () => {
-		window.history.pushState({}, "", "/signup");
-		render(<App />);
-		const page = screen.queryByTestId("signup-page");
+		const page = screen.queryByTestId(pageTestId);
 		expect(page).toBeInTheDocument();
 	});
 
-	it("does not display HomePage at /signup", () => {
-		window.history.pushState({}, "", "/signup");
+	it.each`
+		path         | pageTestId
+		${"/"}       | ${"signup-page"}
+		${"/signup"} | ${"home-page"}
+	`("does not display $pageTestId when path is $path", ({path, pageTestId}) => {
+		window.history.pushState({}, "", path);
 		render(<App />);
-		const page = screen.queryByTestId("home-page");
+		const page = screen.queryByTestId(pageTestId);
 		expect(page).not.toBeInTheDocument();
 	});
+
 });

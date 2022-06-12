@@ -6,10 +6,10 @@ import { signUp } from "../api/apiCalls";
 class SignUpPage extends React.Component {
 
     state = {
-        username: '',
-        email: '',
-        password: '',
-        passwordRepeat: '',
+        username: "",
+        email: "",
+        password: "",
+        passwordRepeat: "",
         apiProgress: false,
         signUpSuccess: false,
         errors: {}
@@ -59,17 +59,17 @@ class SignUpPage extends React.Component {
             <div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
                 { !signUpSuccess && <form className="card mt-5" data-testid="form-sign-up">
                     <div className="card-header">
-                        <h1 className="text-center">{t('signUp')}</h1>
+                        <h1 className="text-center">{t("signUp")}</h1>
                     </div>
                     <div className="card-body">
-                        <Input id="username" label={t('username')} onChange={this.onChange} help={errors.username} />
-                        <Input id="email" label={t('email')} onChange={this.onChange} help={errors.email} />
-                        <Input id="password" type="password" label={t('password')} onChange={this.onChange} help={errors.password} />
-                        <Input id="passwordRepeat" type="password" label={t('passwordRepeat')} onChange={this.onChange} help={passwordMismatch} />
+                        <Input id="username" label={t("username")} onChange={this.onChange} help={errors.username} />
+                        <Input id="email" label={t("email")} onChange={this.onChange} help={errors.email} />
+                        <Input id="password" type="password" label={t("password")} onChange={this.onChange} help={errors.password} />
+                        <Input id="passwordRepeat" type="password" label={t("passwordRepeat")} onChange={this.onChange} help={passwordMismatch} />
                         <div className="text-center">
                             <button disabled={disabled || apiProgress} onClick={this.submit} className="btn btn-primary">
                                 { apiProgress && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> }
-                                {t('signUp')}
+                                {t("signUp")}
                             </button>
                         </div>
                     </div>

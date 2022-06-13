@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
+import userEvent from "@testing-library/user-event";
 
 describe("Routing", () => {
 
@@ -45,10 +46,23 @@ describe("Routing", () => {
 		targetPage
 		${"Home"}
 		${"Sign Up"}
+		${"Login"}
 	`("has link to $targetPage on NavBar", ({ targetPage }) => {
 		setup("/");
 		const link = screen.getByRole("link", { name: targetPage });
 		expect(link).toBeInTheDocument();
+	});
+
+	it.each`
+		initialPath  | clickingTo   | visiblePage
+		${"/"}       | ${"Sign Up"} | ${"signup-page"}
+		${"/signup"} | ${"Home"}    | ${"home-page"}
+		${"/signup"} | ${"Login"}   | ${"login-page"}
+	`("displays $visiblePage after clicking $clickingTo", ({ initialPath, clickingTo, visiblePage }) => {
+		setup(initialPath);
+		const link = screen.getByRole("link", { name: clickingTo });
+		userEvent.click(link);
+		expect(screen.getByTestId(visiblePage)).toBeInTheDocument();
 	});
 
 });

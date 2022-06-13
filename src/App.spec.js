@@ -41,4 +41,14 @@ describe("Routing", () => {
 		expect(page).not.toBeInTheDocument();
 	});
 
+	it.each`
+		targetPage
+		${"Home"}
+		${"Sign Up"}
+	`("has link to $targetPage on NavBar", ({ targetPage }) => {
+		setup("/");
+		const link = screen.getByRole("link", { name: targetPage });
+		expect(link).toBeInTheDocument();
+	});
+
 });

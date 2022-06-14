@@ -14,7 +14,7 @@ function App() {
 
   const onClickLink = (event) => {
     event.preventDefault();
-    const path = event.target.attributes.href.value;
+    const path = event.currentTarget.attributes.href.value;
     window.history.pushState({}, "", path);
     setPath(path);
   }
@@ -24,7 +24,7 @@ function App() {
       <nav className="navbar navbar-expand navbar-light bg-light shadow-sm">
         <div className="container">
           <a className="navbar-brand" href="/" title="Home" onClick={ onClickLink }>
-            <img src={ logo } alt="hoaxify" width="60" />
+            <img src={ logo } alt="Hoaxify" width="60" />
             Hoaxify
           </a>
           <ul className="navbar-nav">

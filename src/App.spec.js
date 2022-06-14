@@ -65,4 +65,11 @@ describe("Routing", () => {
 		expect(screen.getByTestId(visiblePage)).toBeInTheDocument();
 	});
 
+	it("displays home page when brand logo is clicked", () => {
+		setup("/login");
+		const logo = screen.queryByAltText("Hoaxify");
+		userEvent.click(logo);
+		expect(screen.getByTestId("home-page")).toBeInTheDocument();
+	});
+
 });

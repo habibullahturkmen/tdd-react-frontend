@@ -19,18 +19,20 @@ function App() {
   }
 
   return (
-    <div className="container">
-    <div>
-      <a href="/" title="Home" onClick={ onClickLink }>Hoaxify</a>
-      <a href="/signup" title="Sign Up" onClick={ onClickLink }>{ t("signUp") }</a>
-      <a href="/login" title="Login" onClick={ onClickLink }>{ t("login") }</a>
-    </div>
-      { path === "/" && <HomePage /> }
-      { path === "/login" && <LoginPage /> }
-      { path === "/signup" && <SignUpPage /> }
-      { path.startsWith("/user/") && <UserPage /> }
-      <LanguageSelector />
-    </div>
+    <>
+      <div>
+        <a href="/" title="Home" onClick={ onClickLink }>Hoaxify</a>
+        <a href="/signup" title="Sign Up" onClick={ onClickLink }>{ t("signUp") }</a>
+        <a href="/login" title="Login" onClick={ onClickLink }>{ t("login") }</a>
+      </div>
+      <div className="container">
+        { path === "/" && <HomePage /> }
+        { path === "/login" && <LoginPage /> }
+        { path === "/signup" && <SignUpPage /> }
+        { path.startsWith("/user/") && <UserPage /> }
+        <LanguageSelector />
+      </div>
+    </>
   );
 }
 

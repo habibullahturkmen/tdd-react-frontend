@@ -22,9 +22,11 @@ function App() {
     <>
       <nav className="navbar navbar-expand navbar-light bg-light shadow-sm">
         <div className="container">
-          <a href="/" title="Home" onClick={ onClickLink }>Hoaxify</a>
-          <a href="/signup" title="Sign Up" onClick={ onClickLink }>{ t("signUp") }</a>
-          <a href="/login" title="Login" onClick={ onClickLink }>{ t("login") }</a>
+          <a className="navbar-brand" href="/" title="Home" onClick={ onClickLink }>Hoaxify</a>
+          <ul className="navbar-nav">
+            <a className="nav-link" href="/signup" title="Sign Up" onClick={ onClickLink }>{ t("signUp") }</a>
+            <a className="nav-link" href="/login" title="Login" onClick={ onClickLink }>{ t("login") }</a>
+          </ul>
         </div>
       </nav>
       <div className="container">

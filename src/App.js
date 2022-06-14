@@ -20,11 +20,13 @@ function App() {
 
   return (
     <>
-      <div>
-        <a href="/" title="Home" onClick={ onClickLink }>Hoaxify</a>
-        <a href="/signup" title="Sign Up" onClick={ onClickLink }>{ t("signUp") }</a>
-        <a href="/login" title="Login" onClick={ onClickLink }>{ t("login") }</a>
-      </div>
+      <nav className="navbar navbar-expand navbar-light bg-light shadow-sm">
+        <div className="container">
+          <a href="/" title="Home" onClick={ onClickLink }>Hoaxify</a>
+          <a href="/signup" title="Sign Up" onClick={ onClickLink }>{ t("signUp") }</a>
+          <a href="/login" title="Login" onClick={ onClickLink }>{ t("login") }</a>
+        </div>
+      </nav>
       <div className="container">
         { path === "/" && <HomePage /> }
         { path === "/login" && <LoginPage /> }

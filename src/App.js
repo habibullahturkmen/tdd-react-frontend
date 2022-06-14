@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import UserPage from "./pages/UserPage";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
+import logo from "./assets/hoaxify.png";
 
 function App() {
   const { t } = useTranslation();
@@ -22,7 +23,10 @@ function App() {
     <>
       <nav className="navbar navbar-expand navbar-light bg-light shadow-sm">
         <div className="container">
-          <a className="navbar-brand" href="/" title="Home" onClick={ onClickLink }>Hoaxify</a>
+          <a className="navbar-brand" href="/" title="Home" onClick={ onClickLink }>
+            <img src={ logo } alt="hoaxify" width="60" />
+            Hoaxify
+          </a>
           <ul className="navbar-nav">
             <a className="nav-link" href="/signup" title="Sign Up" onClick={ onClickLink }>{ t("signUp") }</a>
             <a className="nav-link" href="/login" title="Login" onClick={ onClickLink }>{ t("login") }</a>

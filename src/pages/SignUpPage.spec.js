@@ -139,11 +139,12 @@ describe("Sign Up Page", () => {
             expect(counter).toBe(1);
         });
 
-        it("displays spinner while the api request is in progress", () => {
+        it("displays spinner while the api request is in progress", async () => {
             setup();
             userEvent.click(button);
             const spinner = screen.getByRole("status", { hidden: true });
             expect(spinner).toBeInTheDocument();
+            await screen.findByText("Please check your e-mail to activate your account");
         });
 
         it("does not display spinner when there is no api request", () => {

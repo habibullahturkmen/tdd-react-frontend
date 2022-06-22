@@ -133,9 +133,7 @@ describe("Sign Up Page", () => {
             setup();
             userEvent.click(button);
             userEvent.click(button);
-
             await screen.findByText("Please check your e-mail to activate your account");
-
             expect(counter).toBe(1);
         });
 

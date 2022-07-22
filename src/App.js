@@ -3,6 +3,7 @@ import LanguageSelector from "./components/LanguageSelector";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import UserPage from "./pages/UserPage";
+import AccountActivationPage from "./pages/AccountActivationPage";
 import { useTranslation } from "react-i18next";
 import logo from "./assets/hoaxify.png";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/login" component={LoginPage} />
           <Route path="/signup" component={SignUpPage} />
           <Route path="/user/:id" component={UserPage} />
+          <Route path="/activate/:token" component={AccountActivationPage} />
         <LanguageSelector />
       </div>
     </Router>

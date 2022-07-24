@@ -2,6 +2,8 @@ import React from "react";
 import Input from "../components/input";
 import { withTranslation } from "react-i18next";
 import { signUp } from "../api/apiCalls";
+import Alert from "../components/Alert";
+import Spinner from "../components/Spinner";
 
 class SignUpPage extends React.Component {
 
@@ -57,7 +59,7 @@ class SignUpPage extends React.Component {
         
         return (
             <div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2" data-testid="signup-page">
-                { !signUpSuccess && <form className="card mt-5" data-testid="form-sign-up">
+                { !signUpSuccess && <form className="card" data-testid="form-sign-up">
                     <div className="card-header">
                         <h1 className="text-center">{t("signUp")}</h1>
                     </div>
@@ -68,13 +70,13 @@ class SignUpPage extends React.Component {
                         <Input id="passwordRepeat" type="password" label={t("passwordRepeat")} onChange={this.onChange} help={passwordMismatch} />
                         <div className="text-center">
                             <button disabled={disabled || apiProgress} onClick={this.submit} className="btn btn-primary">
-                                { apiProgress && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> }
+                                { apiProgress && <Spinner /> }
                                 {t("signUp")}
                             </button>
                         </div>
                     </div>
                 </form> }
-                { signUpSuccess && <div className="alert alert-success mt-3">Please check your e-mail to activate your account</div> }
+                { signUpSuccess && <Alert center>Please check your e-mail to activate your account</Alert> }
             </div>
         );
     }

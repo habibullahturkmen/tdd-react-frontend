@@ -3,7 +3,7 @@ describe("Navigation", () => {
 
 	it("should find the HomePage heading", () => {
 		cy.visit("/");
-		cy.get("h1").contains("Home Page");
+		cy.get("h3").contains("Users");
 	});
 
 	it("should find the SignUpPage heading", () => {

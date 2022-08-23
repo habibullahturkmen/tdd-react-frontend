@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 
-Cypress.on('uncaught:exception', (err, runnable) => {
-	return false;
-});
+// Cypress.on('uncaught:exception', (err, runnable) => {
+// 	return false;
+// });
 
 describe("Navigation", () => {
 
